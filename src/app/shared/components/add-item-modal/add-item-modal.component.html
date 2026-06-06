@@ -1,0 +1,64 @@
+<div class="modal-overlay" (click)="closed.emit()">
+  <div class="modal-sheet sheet-body" (click)="$event.stopPropagation()">
+    <div class="sheet-header">
+      <h3 class="sheet-title font-display">
+        {{ mode() === 'pantry' ? 'Agregar alimento' : 'Agregar al carrito' }}
+      </h3>
+      <button class="close-btn" (click)="closed.emit()">
+        <lucide-angular [img]="XIcon" [size]="20" />
+      </button>
+    </div>
+
+    <div class="form">
+      <div>
+        <label class="field-label">Nombre</label>
+        <input class="field-input" placeholder="Ej. Leche entera" [(ngModel)]="name" />
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label class="field-label">Cantidad</label>
+          <input class="field-input" type="number" [(ngModel)]="quantity" />
+        </div>
+        <div class="col">
+          <label class="field-label">Unidad</label>
+          <select class="field-input" [(ngModel)]="unit">
+            @for (u of units; track u) {
+              <option [value]="u">{{ u }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="field-label">Categoría</label>
+        <div class="cat-chips">
+          @for (c of categories; track c) {
+            <button class="chip" [class.active]="category() === c" (click)="category.set(c)">
+              {{ c }}
+            </button>
+          }
+        </div>
+      </div>
+
+      @if (mode() === 'pantry') {
+        <div>
+          <label class="field-label">Vencimiento</label>
+          <input class="field-input" type="date" [(ngModel)]="expiry" />
+        </div>
+        <div>
+          <label class="field-label">Ubicación</label>
+          <div class="loc-row">
+            @for (l of locations; track l) {
+              <button class="loc-btn font-display" [class.active]="location() === l" (click)="location.set(l)">
+                {{ l }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+
+      <button class="submit-btn font-display" (click)="submit()">Agregar</button>
+    </div>
+  </div>
+</div>

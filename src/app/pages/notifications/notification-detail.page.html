@@ -1,0 +1,123 @@
+<div class="page-header">
+  <div class="title-row">
+    <button class="back-btn" (click)="goBack()">
+      <lucide-angular [img]="BackIcon" [size]="18" />
+    </button>
+    <h1 class="page-title font-display">Notificación</h1>
+  </div>
+</div>
+
+<div class="page-list scrollbar-hide">
+  @if (notification(); as n) {
+    <!-- Encabezado de la notificación -->
+    <div class="detail-card">
+      <div class="detail-head">
+        <div class="detail-icon" [class]="'detail-icon ' + typeMeta[n.type].tileClass">
+          <lucide-angular [img]="typeMeta[n.type].icon" [size]="20" />
+        </div>
+        <div class="detail-headtext">
+          <div class="detail-meta">
+            <span class="type-pill" [class]="'type-pill ' + typeMeta[n.type].tileClass">{{ typeMeta[n.type].label }}</span>
+            <span class="detail-time">{{ relativeTime(n.createdAt) }}</span>
+          </div>
+          <h2 class="detail-title font-display">{{ n.detailTitle || n.title }}</h2>
+        </div>
+      </div>
+      <p class="detail-desc">{{ n.detailDescription || n.message }}</p>
+    </div>
+
+    <!-- Contenido relacionado: producto que vence -->
+    @if (relatedPantryItem(); as item) {
+      <div>
+        <h3 class="section-subtitle block-gap">Producto relacionado</h3>
+        <div class="item-row">
+          <div class="item-icon" [class]="'item-icon ' + catClasses[item.category]">
+            <lucide-angular [img]="catIcons[item.category]" [size]="14" />
+          </div>
+          <div class="item-info">
+            <p class="item-name">{{ item.name }}</p>
+            <p class="item-meta">{{ item.quantity }} {{ item.unit }} · {{ item.location }} · Vence {{ item.expiryDate }}</p>
+          </div>
+          <app-expiry-badge [days]="getDays(item.expiryDate)" />
+        </div>
+      </div>
+    } @else if (notification()?.type === 'expiry' && notification()?.targetId) {
+      <div class="gone-card">
+        <p>Este producto ya no está en tu despensa.</p>
+      </div>
+    }
+
+    <!-- Contenido relacionado: lista de próximos a vencer -->
+    @if (expiringItems().length > 0) {
+      <div>
+        <h3 class="section-subtitle block-gap">Por vencer ({{ expiringItems().length }})</h3>
+        <div class="related-list">
+          @for (item of expiringItems(); track item.id) {
+            <div class="item-row">
+              <div class="item-icon" [class]="'item-icon ' + catClasses[item.category]">
+                <lucide-angular [img]="catIcons[item.category]" [size]="14" />
+              </div>
+              <div class="item-info">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-meta">Vence {{ item.expiryDate }}</p>
+              </div>
+              <app-expiry-badge [days]="getDays(item.expiryDate)" />
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Contenido relacionado: receta -->
+    @if (relatedRecipe(); as recipe) {
+      <div>
+        <h3 class="section-subtitle block-gap">Receta relacionada</h3>
+        <div class="recipe-box">
+          <div class="recipe-head">
+            <div class="recipe-tile">
+              <lucide-angular [img]="typeMeta['recipe'].icon" [size]="20" />
+            </div>
+            <div>
+              <p class="item-name font-display">{{ recipe.name }}</p>
+              <p class="item-meta">{{ recipe.description }}</p>
+            </div>
+          </div>
+          <div class="recipe-meta">
+            <div class="meta">
+              <lucide-angular [img]="ClockIcon" [size]="12" />
+              <span>{{ recipe.time }} min</span>
+            </div>
+            <div class="meta">
+              <lucide-angular [img]="UsersIcon" [size]="12" />
+              <span>{{ recipe.servings }} pers.</span>
+            </div>
+            <span class="diff-pill" [class]="'diff-pill ' + difficultyClasses[recipe.difficulty]">{{ recipe.difficulty }}</span>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Contenido relacionado: pendientes de compras -->
+    @if (pendingShopping().length > 0) {
+      <div>
+        <h3 class="section-subtitle block-gap">Por comprar ({{ pendingShopping().length }})</h3>
+        <div class="shopping-box">
+          @for (item of pendingShopping(); track item.id) {
+            <div class="preview-row">
+              <div class="preview-dot"></div>
+              <span class="preview-name">{{ item.name }}</span>
+              <span class="preview-qty">{{ item.quantity }} {{ item.unit }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- CTA -->
+    <button class="cta-btn font-display" (click)="goCta()">{{ typeMeta[n.type].ctaText }}</button>
+  } @else {
+    <div class="empty-state">
+      <p>Esta notificación ya no existe.</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,106 @@
+<div class="home-scroll scrollbar-hide">
+  <div class="home-content">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <p class="greeting">Buenos días 👋</p>
+        <h1 class="app-title font-display">Mi Mercado</h1>
+      </div>
+      <div class="bell-wrap">
+        <button class="bell-btn" (click)="goNotifications()" aria-label="Notificaciones">
+          <lucide-angular [img]="BellIcon" [size]="18" />
+        </button>
+        @if (notifications.unreadCount() > 0) {
+          <span class="bell-badge">{{ notifications.unreadCount() }}</span>
+        }
+      </div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="summary-grid">
+      <div class="summary-card card-primary">
+        <lucide-angular [img]="FridgeIcon" [size]="20" />
+        <p class="count font-display">{{ pantry.items().length }}</p>
+        <p class="label">Alimentos</p>
+      </div>
+      <div class="summary-card card-accent">
+        <lucide-angular [img]="AlertIcon" [size]="20" />
+        <p class="count font-display">{{ alertCount() }}</p>
+        <p class="label">Alertas</p>
+      </div>
+      <div class="summary-card card-plain">
+        <lucide-angular [img]="CartIcon" [size]="20" />
+        <p class="count font-display">{{ pendingCount() }}</p>
+        <p class="label">Por comprar</p>
+      </div>
+    </div>
+
+    <!-- Alertas de vencimiento -->
+    @if (pantry.expired().length > 0 || pantry.expiringSoon().length > 0) {
+      <div>
+        <h2 class="section-title heading-gap">Alertas de vencimiento</h2>
+        <div class="alert-list">
+          @for (item of pantry.expired(); track item.id) {
+            <div class="alert-row alert-expired">
+              <div class="alert-icon icon-red">
+                <lucide-angular [img]="AlertIcon" [size]="14" />
+              </div>
+              <div class="alert-info">
+                <p class="alert-name font-display">{{ item.name }}</p>
+                <p class="alert-date date-red">Venció el {{ item.expiryDate }}</p>
+              </div>
+              <app-expiry-badge [days]="getDays(item.expiryDate)" />
+            </div>
+          }
+          @for (item of pantry.expiringSoon(); track item.id) {
+            <div class="alert-row alert-soon">
+              <div class="alert-icon icon-orange">
+                <lucide-angular [img]="CalendarIcon" [size]="14" />
+              </div>
+              <div class="alert-info">
+                <p class="alert-name font-display">{{ item.name }}</p>
+                <p class="alert-date">Vence {{ item.expiryDate }}</p>
+              </div>
+              <app-expiry-badge [days]="getDays(item.expiryDate)" />
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Por categoría -->
+    <div>
+      <h2 class="section-title heading-gap">Por categoría</h2>
+      <div class="cat-grid">
+        @for (entry of pantry.categoryCount(); track entry[0]) {
+          <div class="cat-cell" [class]="'cat-cell ' + catClasses[entry[0]]">
+            <div class="cat-head">
+              <lucide-angular [img]="catIcons[entry[0]]" [size]="14" />
+              <span class="cat-name font-display">{{ entry[0] }}</span>
+            </div>
+            <p class="cat-count font-display">{{ entry[1] }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Lista de compras (preview) -->
+    @if (pendingCount() > 0) {
+      <div>
+        <h2 class="section-title heading-gap">Lista de compras</h2>
+        <div class="shopping-preview">
+          @for (item of previewItems(); track item.id) {
+            <div class="preview-row">
+              <div class="preview-dot"></div>
+              <span class="preview-name">{{ item.name }}</span>
+              <span class="preview-qty">{{ item.quantity }} {{ item.unit }}</span>
+            </div>
+          }
+          @if (pendingCount() > 3) {
+            <p class="preview-more">+{{ pendingCount() - 3 }} más por comprar</p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

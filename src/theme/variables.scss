@@ -1,0 +1,68 @@
+// Mi Mercado — Design tokens (replica exacta del tema del Figma Make)
+// Fuente: Figma Make "Mi_Mercado app development" — tema shadcn por defecto
+
+:root {
+  // --- Tokens semánticos del diseño ---
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --primary: #030213;
+  --primary-foreground: #ffffff;
+  --secondary: #eef0f4;
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input-background: #f3f3f5;
+  --radius: 0.625rem;
+
+  // --- Paleta Tailwind usada por el diseño ---
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --orange-50: #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+  --yellow-50: #fefce8;
+  --yellow-100: #fef9c3;
+  --yellow-500: #eab308;
+  --yellow-600: #ca8a04;
+  --yellow-700: #a16207;
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --blue-100: #dbeafe;
+  --blue-700: #1d4ed8;
+  --purple-100: #f3e8ff;
+  --purple-700: #7e22ce;
+  --pink-100: #fce7f3;
+  --pink-700: #be185d;
+
+  // --- Tipografías ---
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  // --- Sombras (Tailwind) ---
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  // --- Mapeo a Ionic (por coherencia si se usan componentes ion-*) ---
+  --ion-background-color: var(--background);
+  --ion-text-color: var(--foreground);
+  --ion-font-family: var(--font-body);
+  --ion-color-primary: #030213;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-danger: #d4183d;
+}

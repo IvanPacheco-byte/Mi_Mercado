@@ -1,0 +1,54 @@
+.page-header {
+  flex-shrink: 0;
+  padding: 20px 16px 12px;
+}
+
+.page-title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.page-subtitle {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+  margin-top: 4px;
+}
+
+.page-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dot-header {
+  padding: 0 4px;
+}
+
+.dot-red {
+  background: var(--red-500);
+}
+
+.dot-orange {
+  background: var(--orange-500);
+}
+
+.dot-yellow {
+  background: var(--yellow-500);
+}
+
+.dot-primary {
+  background: var(--primary);
+}
+
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

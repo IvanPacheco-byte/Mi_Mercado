@@ -1,0 +1,404 @@
+/*
+ * Mi Mercado — App Global CSS
+ * Replica del sistema visual del Figma Make (Tailwind + tema shadcn).
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+
+/* Tipografías del diseño (locales, sin CDN) */
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+input,
+select {
+  font: inherit;
+}
+
+/* ------------------------------------------------------------------ */
+/* Layout de páginas (hijas del router-outlet)                         */
+/* Estilo global: los componentes creados por el router no reciben     */
+/* la encapsulación del AppComponent.                                  */
+/* ------------------------------------------------------------------ */
+
+.app-content > *:not(router-outlet) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* fluido en móvil; columna legible centrada en tablet/desktop */
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilidades compartidas                                              */
+/* ------------------------------------------------------------------ */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Colores por categoría (bg-X-100 / text-X-700 del diseño) */
+.cat-lacteos {
+  background: var(--blue-100);
+  color: var(--blue-700);
+}
+
+.cat-frutas {
+  background: var(--orange-100);
+  color: var(--orange-700);
+}
+
+.cat-cereales {
+  background: var(--yellow-100);
+  color: var(--yellow-700);
+}
+
+.cat-proteinas {
+  background: var(--red-100);
+  color: var(--red-700);
+}
+
+.cat-bebidas {
+  background: var(--purple-100);
+  color: var(--purple-700);
+}
+
+.cat-snacks {
+  background: var(--pink-100);
+  color: var(--pink-700);
+}
+
+/* Tiles de notificación por tipo */
+.tile-orange {
+  background: var(--orange-100);
+  color: var(--orange-600);
+}
+
+.tile-green {
+  background: var(--green-100);
+  color: var(--green-600);
+}
+
+.tile-blue {
+  background: var(--blue-100);
+  color: var(--blue-700);
+}
+
+.tile-muted {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* Dificultad de recetas */
+.diff-facil {
+  background: var(--green-100);
+  color: var(--green-700);
+}
+
+.diff-media {
+  background: var(--yellow-100);
+  color: var(--yellow-700);
+}
+
+.diff-dificil {
+  background: var(--red-100);
+  color: var(--red-700);
+}
+
+/* Chip de filtro (categorías) — filled */
+.chip {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  transition: all 0.15s ease;
+
+  &.active {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* Chip de filtro — outlined (ubicaciones) */
+.chip-outline {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted-foreground);
+  transition: all 0.15s ease;
+
+  &.active {
+    border-color: var(--primary);
+    background: rgba(3, 2, 19, 0.1);
+    color: var(--primary);
+  }
+}
+
+/* Fila de chips con scroll horizontal */
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+/* Título de sección en mayúsculas */
+.section-title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-display);
+}
+
+.section-subtitle {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-display);
+}
+
+/* Fila de item (despensa / compras / vencimientos) */
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+
+  .item-name {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--foreground);
+    font-family: var(--font-display);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .item-meta {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--muted-foreground);
+  }
+}
+
+.delete-btn {
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--red-50);
+  }
+}
+
+/* Botón "+" circular del header */
+.add-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Estado vacío */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 0;
+  color: var(--muted-foreground);
+
+  lucide-angular {
+    margin-bottom: 12px;
+    opacity: 0.3;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+/* Encabezado de sección con punto de color */
+.dot-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+  }
+}
+
+/* Overlay + sheet modal (idéntico al original) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(26, 32, 16, 0.5);
+}
+
+.modal-sheet {
+  background: var(--card);
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 384px;
+  box-shadow: var(--shadow-2xl);
+  animation: sheet-up 0.25s ease-out;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(48px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Inputs del formulario (bg-input-background, rounded-xl) */
+.field-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field-input {
+  margin-top: 4px;
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: var(--input-background);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 20px;
+  font-family: var(--font-body);
+  border: none;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(3, 2, 19, 0.3);
+  }
+}

@@ -1,0 +1,90 @@
+<div class="modal-overlay overlay-dark" (click)="closed.emit()">
+  <div class="modal-sheet recipe-sheet" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="sheet-header">
+      <div class="header-top">
+        <div class="header-text">
+          <h3 class="recipe-title font-display">{{ recipe().name }}</h3>
+          <p class="recipe-desc">{{ recipe().description }}</p>
+        </div>
+        <button class="close-btn" (click)="closed.emit()">
+          <lucide-angular [img]="XIcon" [size]="20" />
+        </button>
+      </div>
+
+      <!-- Meta -->
+      <div class="meta-row">
+        <div class="meta">
+          <lucide-angular [img]="ClockIcon" [size]="14" />
+          <span>{{ recipe().time }} min</span>
+        </div>
+        <div class="meta">
+          <lucide-angular [img]="UsersIcon" [size]="14" />
+          <span>{{ recipe().servings }} personas</span>
+        </div>
+        <span class="diff-pill" [class]="'diff-pill ' + difficultyClasses[recipe().difficulty]">
+          {{ recipe().difficulty }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div class="sheet-content scrollbar-hide">
+      <!-- Estado del match -->
+      <div class="match-card" [class]="'match-card ' + matchTone()">
+        <div class="match-head">
+          <span class="match-label font-display">Ingredientes disponibles</span>
+          <span class="match-score font-display">{{ matchData().score }}%</span>
+        </div>
+        <div class="match-track">
+          <div class="match-fill" [style.width.%]="matchData().score"></div>
+        </div>
+      </div>
+
+      <!-- Ingredientes -->
+      <div>
+        <h4 class="block-title font-display">Ingredientes</h4>
+        <div class="ingredients">
+          @for (ingredient of recipe().ingredients; track ingredient) {
+            <div class="ingredient" [class.have]="hasIngredient(ingredient)">
+              <div class="ing-check" [class.have]="hasIngredient(ingredient)">
+                @if (hasIngredient(ingredient)) {
+                  <lucide-angular [img]="CheckIcon" [size]="12" />
+                } @else {
+                  <lucide-angular [img]="XIcon" [size]="12" />
+                }
+              </div>
+              <span class="ing-name" [class.have]="hasIngredient(ingredient)">{{ ingredient }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Faltantes -->
+      @if (matchData().missing.length > 0) {
+        <div class="missing-card">
+          <p class="missing-title font-display">Te faltan {{ matchData().missing.length }} ingredientes</p>
+          <p class="missing-text">Agrégalos a tu lista de compras para preparar esta receta</p>
+        </div>
+      }
+
+      <!-- Preparación -->
+      <div>
+        <h4 class="block-title font-display">Preparación</h4>
+        <div class="steps">
+          @for (instruction of recipe().instructions; track $index) {
+            <div class="step">
+              <div class="step-num font-display">{{ $index + 1 }}</div>
+              <p class="step-text">{{ instruction }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sheet-footer">
+      <button class="close-cta font-display" (click)="closed.emit()">Cerrar</button>
+    </div>
+  </div>
+</div>

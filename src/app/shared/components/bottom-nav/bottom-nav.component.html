@@ -1,0 +1,12 @@
+<nav class="bottom-nav">
+  <div class="nav-items">
+    @for (item of items; track item.path) {
+      <button class="nav-item" (click)="go(item.path)">
+        <div class="icon-box" [class.active]="isActive(item.path)">
+          <lucide-angular [img]="item.icon" [size]="20" />
+        </div>
+        <span class="nav-label font-display" [class.active]="isActive(item.path)">{{ item.label }}</span>
+      </button>
+    }
+  </div>
+</nav>

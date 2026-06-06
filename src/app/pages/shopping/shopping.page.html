@@ -1,0 +1,72 @@
+<div class="page-header">
+  <div class="title-row">
+    <h1 class="page-title font-display">Lista de Compras</h1>
+    <button class="add-btn" (click)="showModal.set(true)">
+      <lucide-angular [img]="PlusIcon" [size]="18" />
+    </button>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-card">
+    <div class="progress-head">
+      <span class="progress-label">{{ shopping.done().length }} de {{ shopping.items().length }} productos</span>
+      <span class="progress-pct font-display">{{ shopping.progress() }}%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" [style.width.%]="shopping.progress()"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-list scrollbar-hide">
+  <!-- Por comprar -->
+  @if (shopping.pending().length > 0) {
+    <div>
+      <h3 class="section-subtitle group-title">Por comprar ({{ shopping.pending().length }})</h3>
+      <div class="group-items">
+        @for (item of shopping.pending(); track item.id) {
+          <div class="item-row shopping-row">
+            <button class="check-circle" (click)="shopping.toggle(item.id)"></button>
+            <div class="item-icon small-icon" [class]="'item-icon small-icon ' + catClasses[item.category]">
+              <lucide-angular [img]="catIcons[item.category]" [size]="14" />
+            </div>
+            <div class="item-info">
+              <p class="item-name">{{ item.name }}</p>
+              <p class="item-meta">{{ item.quantity }} {{ item.unit }}</p>
+            </div>
+            <button class="delete-btn" (click)="shopping.remove(item.id)">
+              <lucide-angular [img]="TrashIcon" [size]="13" />
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Comprado -->
+  @if (shopping.done().length > 0) {
+    <div>
+      <h3 class="section-subtitle group-title muted-title">Comprado ({{ shopping.done().length }})</h3>
+      <div class="group-items">
+        @for (item of shopping.done(); track item.id) {
+          <div class="item-row done-row">
+            <button class="check-circle checked" (click)="shopping.toggle(item.id)">
+              <lucide-angular [img]="CheckIcon" [size]="12" />
+            </button>
+            <div class="item-info">
+              <p class="item-name done-name">{{ item.name }}</p>
+              <p class="item-meta">{{ item.quantity }} {{ item.unit }}</p>
+            </div>
+            <button class="delete-btn" (click)="shopping.remove(item.id)">
+              <lucide-angular [img]="TrashIcon" [size]="13" />
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+@if (showModal()) {
+  <app-add-item-modal mode="shopping" (closed)="showModal.set(false)" (added)="onAdd($event)" />
+}

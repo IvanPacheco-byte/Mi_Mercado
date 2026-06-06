@@ -1,0 +1,64 @@
+<div class="page-header">
+  <div class="title-row">
+    <h1 class="page-title font-display">Despensa</h1>
+    <button class="add-btn" (click)="showModal.set(true)">
+      <lucide-angular [img]="PlusIcon" [size]="18" />
+    </button>
+  </div>
+
+  <!-- Búsqueda -->
+  <div class="search-wrap">
+    <lucide-angular class="search-icon" [img]="SearchIcon" [size]="15" />
+    <input
+      class="search-input"
+      placeholder="Buscar alimentos..."
+      [ngModel]="search()"
+      (ngModelChange)="search.set($event)"
+    />
+  </div>
+
+  <!-- Filtro por categoría -->
+  <div class="chip-row scrollbar-hide">
+    @for (c of categories; track c) {
+      <button class="chip" [class.active]="filterCat() === c" (click)="filterCat.set(c)">{{ c }}</button>
+    }
+  </div>
+
+  <!-- Filtro por ubicación -->
+  <div class="chip-row loc-row scrollbar-hide">
+    @for (l of locations; track l) {
+      <button class="chip-outline" [class.active]="filterLoc() === l" (click)="filterLoc.set(l)">{{ l }}</button>
+    }
+  </div>
+</div>
+
+<div class="page-list scrollbar-hide">
+  @if (filtered().length === 0) {
+    <div class="empty-state">
+      <lucide-angular [img]="PackageIcon" [size]="40" />
+      <p>Sin resultados</p>
+    </div>
+  } @else {
+    @for (item of filtered(); track item.id) {
+      <div class="item-row pantry-row">
+        <div class="item-icon" [class]="'item-icon ' + catClasses[item.category]">
+          <lucide-angular [img]="catIcons[item.category]" [size]="14" />
+        </div>
+        <div class="item-info">
+          <p class="item-name">{{ item.name }}</p>
+          <p class="item-meta">{{ item.quantity }} {{ item.unit }} · {{ item.location }}</p>
+        </div>
+        <div class="row-actions">
+          <app-expiry-badge [days]="getDays(item.expiryDate)" />
+          <button class="delete-btn" (click)="pantry.remove(item.id)">
+            <lucide-angular [img]="TrashIcon" [size]="13" />
+          </button>
+        </div>
+      </div>
+    }
+  }
+</div>
+
+@if (showModal()) {
+  <app-add-item-modal mode="pantry" (closed)="showModal.set(false)" (added)="onAdd($event)" />
+}

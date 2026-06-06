@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1 class="page-title font-display">Vencimientos</h1>
+  <p class="page-subtitle">{{ attentionCount() }} productos requieren atención</p>
+</div>
+
+<div class="page-list scrollbar-hide">
+  @for (section of sections(); track section.title) {
+    <div>
+      <div class="dot-header">
+        <div class="dot" [class]="'dot ' + section.accent"></div>
+        <h3 class="section-subtitle">{{ section.title }} ({{ section.items.length }})</h3>
+      </div>
+      <div class="section-items">
+        @for (item of section.items; track item.id) {
+          <div class="item-row">
+            <div class="item-icon" [class]="'item-icon ' + catClasses[item.category]">
+              <lucide-angular [img]="catIcons[item.category]" [size]="14" />
+            </div>
+            <div class="item-info">
+              <p class="item-name">{{ item.name }}</p>
+              <p class="item-meta">Vence: {{ item.expiryDate }}</p>
+            </div>
+            <app-expiry-badge [days]="getDays(item.expiryDate)" />
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

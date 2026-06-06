@@ -1,0 +1,124 @@
+.page-header {
+  flex-shrink: 0;
+  padding: 20px 16px 12px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+// --- Progreso ---
+.progress-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.progress-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.progress-pct {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--muted);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+
+// --- Lista ---
+.page-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group-title {
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.muted-title {
+  color: var(--muted-foreground);
+}
+
+.group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shopping-row {
+  box-shadow: var(--shadow-sm);
+}
+
+.done-row {
+  background: rgba(236, 236, 240, 0.5); // bg-muted/50
+  opacity: 0.6;
+}
+
+.check-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  border: 2px solid var(--primary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+
+  &.checked {
+    background: var(--primary);
+    border: none;
+    color: var(--primary-foreground);
+  }
+}
+
+.small-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.done-name {
+  text-decoration: line-through;
+}

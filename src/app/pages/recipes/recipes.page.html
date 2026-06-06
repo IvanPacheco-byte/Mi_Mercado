@@ -1,0 +1,98 @@
+<div class="page-header">
+  <div class="header-row">
+    <div>
+      <h1 class="page-title font-display">Recetas</h1>
+      <p class="page-subtitle">{{ perfectMatches().length }} recetas disponibles con tus ingredientes</p>
+    </div>
+    <div class="chef-badge">
+      <lucide-angular [img]="ChefHatIcon" [size]="18" />
+    </div>
+  </div>
+
+  <!-- Filtro por categoría -->
+  <div class="chip-row scrollbar-hide">
+    @for (cat of categories; track cat) {
+      <button class="chip" [class.active]="filterCategory() === cat" (click)="filterCategory.set(cat)">
+        {{ cat }}
+      </button>
+    }
+  </div>
+</div>
+
+<div class="page-list scrollbar-hide">
+  <!-- Puedes cocinar ahora -->
+  @if (perfectMatches().length > 0) {
+    <div>
+      <div class="dot-header">
+        <div class="dot dot-green"></div>
+        <h3 class="section-subtitle">Puedes cocinar ahora ({{ perfectMatches().length }})</h3>
+      </div>
+      <div class="cards">
+        @for (entry of perfectMatches(); track entry.recipe.id) {
+          <app-recipe-card
+            [recipe]="entry.recipe"
+            [score]="entry.score"
+            [available]="entry.available"
+            (clicked)="selectedRecipe.set(entry.recipe)"
+          />
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Casi listo -->
+  @if (goodMatches().length > 0) {
+    <div>
+      <div class="dot-header">
+        <div class="dot dot-yellow"></div>
+        <h3 class="section-subtitle">Casi listo ({{ goodMatches().length }})</h3>
+      </div>
+      <div class="cards">
+        @for (entry of goodMatches(); track entry.recipe.id) {
+          <app-recipe-card
+            [recipe]="entry.recipe"
+            [score]="entry.score"
+            [available]="entry.available"
+            (clicked)="selectedRecipe.set(entry.recipe)"
+          />
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Otras opciones -->
+  @if (partialMatches().length > 0) {
+    <div>
+      <div class="dot-header">
+        <div class="dot dot-muted"></div>
+        <h3 class="section-subtitle">Otras opciones ({{ partialMatches().length }})</h3>
+      </div>
+      <div class="cards">
+        @for (entry of partialMatches(); track entry.recipe.id) {
+          <app-recipe-card
+            [recipe]="entry.recipe"
+            [score]="entry.score"
+            [available]="entry.available"
+            (clicked)="selectedRecipe.set(entry.recipe)"
+          />
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Estado vacío -->
+  @if (filtered().length === 0) {
+    <div class="empty-state">
+      <lucide-angular [img]="ChefHatIcon" [size]="40" />
+      <p>No hay recetas en esta categoría</p>
+    </div>
+  }
+</div>
+
+@if (selectedRecipe() && selectedMatch()) {
+  <app-recipe-detail-modal
+    [recipe]="selectedRecipe()!"
+    [matchData]="selectedMatch()!"
+    (closed)="selectedRecipe.set(null)"
+  />
+}

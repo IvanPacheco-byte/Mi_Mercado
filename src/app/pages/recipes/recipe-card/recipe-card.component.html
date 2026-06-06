@@ -1,0 +1,35 @@
+<button class="recipe-card" (click)="clicked.emit()">
+  <div class="card-top">
+    <div class="chef-tile">
+      <lucide-angular [img]="ChefHatIcon" [size]="20" />
+    </div>
+    <div class="card-text">
+      <h4 class="recipe-name font-display">{{ recipe().name }}</h4>
+      <p class="recipe-desc">{{ recipe().description }}</p>
+    </div>
+    <lucide-angular class="chevron" [img]="ChevronRightIcon" [size]="16" />
+  </div>
+
+  <div class="meta-row">
+    <div class="meta">
+      <lucide-angular [img]="ClockIcon" [size]="12" />
+      <span>{{ recipe().time }} min</span>
+    </div>
+    <div class="meta">
+      <lucide-angular [img]="UsersIcon" [size]="12" />
+      <span>{{ recipe().servings }} pers.</span>
+    </div>
+    <span [class]="'diff-pill ' + difficultyClasses[recipe().difficulty]">{{ recipe().difficulty }}</span>
+  </div>
+
+  <!-- Indicador de match -->
+  <div class="match" [class]="'match ' + tone()">
+    <div class="match-head">
+      <span class="match-count">{{ available() }} de {{ recipe().ingredients.length }} ingredientes</span>
+      <span class="match-score font-display">{{ score() }}%</span>
+    </div>
+    <div class="match-track">
+      <div class="match-fill" [style.width.%]="score()"></div>
+    </div>
+  </div>
+</button>

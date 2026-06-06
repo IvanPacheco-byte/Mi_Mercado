@@ -1,0 +1,91 @@
+.sheet-body {
+  padding: 24px 24px 40px;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sheet-title {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.close-btn {
+  padding: 4px;
+  border-radius: 9999px;
+  color: var(--muted-foreground);
+  display: flex;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--muted);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+
+  .col {
+    flex: 1;
+  }
+}
+
+.cat-chips {
+  margin-top: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.loc-row {
+  margin-top: 4px;
+  display: flex;
+  gap: 8px;
+}
+
+.loc-btn {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  transition: all 0.15s ease;
+
+  &.active {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 16px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 8px;
+  transition: transform 0.15s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

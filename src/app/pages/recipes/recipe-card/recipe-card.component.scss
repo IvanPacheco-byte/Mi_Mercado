@@ -1,0 +1,152 @@
+.recipe-card {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  transition: all 0.15s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.chef-tile {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(3, 2, 19, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.recipe-name {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.recipe-desc {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+  margin-top: 2px;
+}
+
+.chevron {
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+}
+
+.diff-pill {
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 600;
+}
+
+// --- Match ---
+.match {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &.tone-green {
+    .match-score {
+      color: var(--green-600);
+    }
+
+    .match-fill {
+      background: var(--green-500);
+    }
+  }
+
+  &.tone-yellow {
+    .match-score {
+      color: var(--yellow-600);
+    }
+
+    .match-fill {
+      background: var(--yellow-500);
+    }
+  }
+
+  &.tone-muted {
+    .match-score {
+      color: var(--muted-foreground);
+    }
+
+    .match-fill {
+      background: var(--muted-foreground);
+    }
+  }
+}
+
+.match-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.match-count {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+}
+
+.match-score {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+}
+
+.match-track {
+  height: 6px;
+  background: var(--muted);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.match-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}

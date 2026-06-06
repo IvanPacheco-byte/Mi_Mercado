@@ -1,0 +1,284 @@
+.home-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.home-content {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// --- Header ---
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.greeting {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted-foreground);
+}
+
+.app-title {
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.bell-wrap {
+  position: relative;
+}
+
+.bell-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  color: var(--foreground);
+}
+
+.bell-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--destructive);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// --- Summary cards ---
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.summary-card {
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .count {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 800;
+  }
+
+  .label {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.card-primary {
+  background: var(--primary);
+
+  lucide-angular,
+  .label {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .count {
+    color: var(--primary-foreground);
+  }
+}
+
+.card-accent {
+  background: var(--accent);
+
+  lucide-angular,
+  .label {
+    color: rgba(3, 2, 19, 0.7);
+  }
+
+  .count {
+    color: var(--accent-foreground);
+  }
+}
+
+.card-plain {
+  background: var(--card);
+  border: 1px solid var(--border);
+
+  lucide-angular,
+  .label {
+    color: var(--muted-foreground);
+  }
+
+  .count {
+    color: var(--foreground);
+  }
+}
+
+.heading-gap {
+  margin-bottom: 12px;
+}
+
+// --- Alertas ---
+.alert-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alert-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.alert-expired {
+  background: var(--red-50);
+  border: 1px solid var(--red-100);
+}
+
+.alert-soon {
+  background: var(--orange-50);
+  border: 1px solid var(--orange-100);
+}
+
+.alert-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.icon-red {
+    background: var(--red-100);
+    color: var(--red-600);
+  }
+
+  &.icon-orange {
+    background: var(--orange-100);
+    color: var(--orange-600);
+  }
+}
+
+.alert-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert-name {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-date {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+
+  &.date-red {
+    color: var(--red-600);
+  }
+}
+
+// --- Por categoría ---
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cat-cell {
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cat-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cat-name {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.cat-count {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 800;
+}
+
+// --- Preview lista de compras ---
+.shopping-preview {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+.preview-name {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--foreground);
+  flex: 1;
+}
+
+.preview-qty {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+}
+
+.preview-more {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--muted-foreground);
+  text-align: center;
+  padding-top: 4px;
+}
