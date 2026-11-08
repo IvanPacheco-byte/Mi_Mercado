@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Contenedor 1: El frontend web (Tu app Ionic montada en Nginx)
+  frontend-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend-api
+
+  # Contenedor 2: El Backend / API (Node.js con Express)
+  backend-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://database:27017/mi_mercado
+    depends_on:
+      - database
+
+  # Contenedor 3: La Base de Datos (MongoDB)
+  database:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
