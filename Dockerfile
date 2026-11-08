@@ -14,6 +14,10 @@ RUN npm run build -- --configuration=production
 
 # Etapa 2: Servir la app compilada usando un servidor Nginx
 FROM nginx:alpine
+
+# 🌟 AGREGA ESTA LÍNEA AQUÍ ABAJO:
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copiamos los archivos estáticos generados al directorio público de Nginx
 COPY --from=build /app/www /usr/share/nginx/html
 
